@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class Butom : MonoBehaviour
 {
+    private Camera mainCamera;
+
+    void Start()
+    {
+        mainCamera = Camera.main;
+    }
+
     void Update()
     {
-        LookAtCamera();
-    }
+        // Отримуємо позицію камери
+        Vector3 cameraPosition = mainCamera.transform.position;
 
-    void OnMouseUpAsButton()
-    {
-        //Debug.Log("This is a button, I must have a collider to detect");
-    }
+        // Обчислюємо напрямок від об'єкта до камери
+        Vector3 directionToCamera = cameraPosition - transform.position;
 
-    void LookAtCamera()
-    {
-        // Отримуємо поточну активну камеру
-        Camera camera = Camera.main;
-        if (camera != null)
-        {
-            // Встановлюємо об'єкт, щоб він дивився на камеру
-            transform.LookAt(camera.transform);
-        }
+        // Оновлюємо forward вектор об'єкта, щоб він завжди дивився на камеру
+        transform.forward = directionToCamera;
     }
 }
