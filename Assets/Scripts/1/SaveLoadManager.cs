@@ -38,7 +38,7 @@ public class SaveLoadManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/" + saveFileName, json);
-        Debug.Log("Game Saved: " + json);
+        //Debug.Log("Game Saved: " + json);
     }
 
     public void LoadGame()

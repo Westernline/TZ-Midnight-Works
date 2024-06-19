@@ -89,7 +89,7 @@ public class FuelingStation : MonoBehaviour
 
     IEnumerator FuelCar(GameObject car)
     {
-        if (currentFuel <= 0)
+        if (currentFuel <= 0 && currentFuel == 0)
         {
             currentFuel = 0 ;
             yield return null; // Wait for the next frame, the station has no fuel

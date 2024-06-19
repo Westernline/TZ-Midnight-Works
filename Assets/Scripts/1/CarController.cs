@@ -153,55 +153,57 @@ public class CarController : MonoBehaviour
     }
 
     void FindNearestFuelingStation()
+{
+    if (refuelPoints.Contains(currentWP))
     {
-        if (refuelPoints.Contains(currentWP))
+        FuelingStation nearestStation = null;
+        float nearestDistance = Mathf.Infinity;
+        FuelingStation nearestStationWithShortestQueue = null;
+        int shortestQueue = int.MaxValue;
+
+        foreach (FuelingStation station in FindObjectsOfType<FuelingStation>())
         {
-            FuelingStation nearestStation = null;
-            float nearestDistance = Mathf.Infinity;
-            FuelingStation nearestStationWithShortestQueue = null;
-            int shortestQueue = int.MaxValue;
+            float distance = Vector3.Distance(transform.position, station.transform.position);
 
-            foreach (FuelingStation station in FindObjectsOfType<FuelingStation>())
+            if (distance <= 25f)
             {
-                float distance = Vector3.Distance(transform.position, station.transform.position);
+                int queueLength = station.GetCarQueueLength();
+                float currentFuel = station.GetCurrentFuel();
 
-                if (distance <= 25f)
+                if (currentFuel > 0 && queueLength == 0 && station.IsCarNotInQueue(this.gameObject) && distance < nearestDistance)
                 {
-                    int queueLength = station.GetCarQueueLength();
-
-                    if (queueLength == 0 && station.IsCarNotInQueue(this.gameObject) && distance < nearestDistance)
-                    {
-                        nearestStation = station;
-                        nearestDistance = distance;
-                    }
-                    else if (queueLength == 0 && station.IsCarNotInQueue(this.gameObject) && (queueLength < shortestQueue || (queueLength == shortestQueue && distance < nearestDistance)))
-                    {
-                        nearestStationWithShortestQueue = station;
-                        shortestQueue = queueLength;
-                    }
+                    nearestStation = station;
+                    nearestDistance = distance;
+                }
+                else if (currentFuel > 0 && queueLength == 0 && station.IsCarNotInQueue(this.gameObject) && (queueLength < shortestQueue || (queueLength == shortestQueue && distance < nearestDistance)))
+                {
+                    nearestStationWithShortestQueue = station;
+                    shortestQueue = queueLength;
                 }
             }
+        }
 
-            if (nearestStation != null)
-            {
-                nearestStation.AddCarToQueue(this.gameObject);
-                Transform fuelingPoint = nearestStation.transform.GetChild(0);
-                waypoints = new GameObject[] { fuelingPoint.gameObject };
-                currentWP = 0;
-                fuelingStation = nearestStation;
-                MoveToWaypoint();
-            }
-            else if (nearestStationWithShortestQueue != null)
-            {
-                nearestStationWithShortestQueue.AddCarToQueue(this.gameObject);
-                Transform fuelingPoint = nearestStationWithShortestQueue.transform.GetChild(0);
-                waypoints = new GameObject[] { fuelingPoint.gameObject };
-                currentWP = 0;
-                fuelingStation = nearestStationWithShortestQueue;
-                MoveToWaypoint();
-            }
+        if (nearestStation != null)
+        {
+            nearestStation.AddCarToQueue(this.gameObject);
+            Transform fuelingPoint = nearestStation.transform.GetChild(0);
+            waypoints = new GameObject[] { fuelingPoint.gameObject };
+            currentWP = 0;
+            fuelingStation = nearestStation;
+            MoveToWaypoint();
+        }
+        else if (nearestStationWithShortestQueue != null)
+        {
+            nearestStationWithShortestQueue.AddCarToQueue(this.gameObject);
+            Transform fuelingPoint = nearestStationWithShortestQueue.transform.GetChild(0);
+            waypoints = new GameObject[] { fuelingPoint.gameObject };
+            currentWP = 0;
+            fuelingStation = nearestStationWithShortestQueue;
+            MoveToWaypoint();
         }
     }
+}
+
 
     void FindOriginalWaypoints()
     {

@@ -18258,12 +18258,14 @@ MonoBehaviour:
   mapMinX: -65
   mapMaxX: 50
   mapMinZ: -40
-  MapMaxZ: 70
+  mapMaxZ: 50
   moveSpeed: 20
   newPos: {x: 0, y: 0, z: 0}
   dragStartPos: {x: 0, y: 0, z: 0}
   dragCurrPos: {x: 0, y: 0, z: 0}
   zoomAmount: 0
+  zoomOutMin: 0
+  zoomOutMax: 0
   maxZoom: -10
   minZoom: 10
   _camera: {fileID: 0}

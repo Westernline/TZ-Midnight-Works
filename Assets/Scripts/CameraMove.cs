@@ -8,16 +8,15 @@ public class CameraMove : MonoBehaviour
     Plane Plane;
     public Transform camTransform;
     public bool lockUp;
-    public static CameraMove instance {get;private set;}
-    public float mapMinX, mapMaxX, mapMinZ, MapMaxZ;
+    public static CameraMove instance { get; private set; }
+    public float mapMinX, mapMaxX, mapMinZ, mapMaxZ;
     [SerializeField] float moveSpeed;
     public Vector3 newPos;
     public Vector3 dragStartPos;
     public Vector3 dragCurrPos;
     public float zoomAmount;
-
-    float zoomOutMin;
-    float zoomOutMax;
+    public float zoomOutMin;
+    public float zoomOutMax;
     public float maxZoom;
     public float minZoom;
     [SerializeField] Camera _camera;
@@ -25,18 +24,20 @@ public class CameraMove : MonoBehaviour
     void Awake()
     {
         instance = this;
-        if(_camera == null)
+        if (_camera == null)
             _camera = Camera.main;
     }
 
     void Start()
     {
         newPos = transform.position;
+        zoomOutMin = minZoom;
+        zoomOutMax = maxZoom;
     }
 
     void Update()
     {
-        if(!lockUp)
+        if (!lockUp)
             HandleMouseInput();
     }
 
@@ -61,98 +62,76 @@ public class CameraMove : MonoBehaviour
 
     void HandleMouseInput()
     {
-        if(Input.touchCount >= 1)
+        if (Input.touchCount == 1)
         {
+            // Обробка переміщення за один дотик (тягнення по екрану)
             Plane.SetNormalAndPosition(transform.up, transform.position);
-        }
-        
-        if(Input.touchCount >= 2)
-        {
-            isMoveStarting = false;
-            var pos1 = PlanePos(Input.GetTouch(0).position);
-            var pos2 = PlanePos(Input.GetTouch(1).position);
-            var pos1b = PlanePos(Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition);
-            var pos2b = PlanePos(Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition);
-            var zoom = Vector3.Distance(pos1, pos2) / Vector3.Distance(pos1b, pos2b);
-            if(zoom == 0 || zoom > 10)
-                return;
 
-            if(zoom < 1 && zoomAmount < minZoom)
-            {
-                _camera.transform.position = Vector3.LerpUnclamped(pos1, _camera.transform.position, 1 / zoom);
-                var _zoom = 80f * Time.deltaTime;
-                zoomAmount += _zoom;
-            }
-            else if(zoom > 1 && zoomAmount > maxZoom)
-            {
-                _camera.transform.position = Vector3.LerpUnclamped(pos1, _camera.transform.position, 1 / zoom);
-                var _zoom = 80f * Time.deltaTime;
-                zoomAmount -= _zoom;
-            }
-        }
-        else if(Input.GetMouseButtonDown(0))
-        {
-            isMoveStarting = true;
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            float entry;
-            if(plane.Raycast(ray, out entry))
-            {
-                dragStartPos = ray.GetPoint(entry);
-            }
-        }
-        else if(Input.GetMouseButton(0))
-        {
-            if(!isMoveStarting)
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 isMoveStarting = true;
-                Plane _plane = new Plane(Vector3.up, Vector3.zero);
-                Ray _ray = _camera.ScreenPointToRay(Input.mousePosition);
-                float _entry;
-                Debug.Log("kekw");
-                if(_plane.Raycast(_ray, out _entry))
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                Ray ray = _camera.ScreenPointToRay(Input.GetTouch(0).position);
+                float entry;
+                if (plane.Raycast(ray, out entry))
                 {
-                    dragStartPos = _ray.GetPoint(_entry);
+                    dragStartPos = ray.GetPoint(entry);
                 }
             }
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            float entry;
-            if(plane.Raycast(ray, out entry))
+            else if (Input.GetTouch(0).phase == TouchPhase.Moved)
             {
-                dragCurrPos = ray.GetPoint(entry);
-                newPos = transform.position + dragStartPos - dragCurrPos;
+                if (!isMoveStarting)
+                {
+                    isMoveStarting = true;
+                    Plane _plane = new Plane(Vector3.up, Vector3.zero);
+                    Ray _ray = _camera.ScreenPointToRay(Input.GetTouch(0).position);
+                    float _entry;
+                    if (_plane.Raycast(_ray, out _entry))
+                    {
+                        dragStartPos = _ray.GetPoint(_entry);
+                    }
+                }
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                Ray ray = _camera.ScreenPointToRay(Input.GetTouch(0).position);
+                float entry;
+                if (plane.Raycast(ray, out entry))
+                {
+                    dragCurrPos = ray.GetPoint(entry);
+                    newPos = transform.position + dragStartPos - dragCurrPos;
+                }
             }
+        }
+        else if (Input.touchCount == 2)
+        {
+            // Обробка жесту пінча (масштабування)
+            isMoveStarting = false;
+
+            // Отримання позицій двох торків
+            Vector2 touch1Pos = Input.GetTouch(0).position;
+            Vector2 touch2Pos = Input.GetTouch(1).position;
+
+            // Отримання попередніх позицій двох торків
+            Vector2 touch1PrevPos = touch1Pos - Input.GetTouch(0).deltaPosition;
+            Vector2 touch2PrevPos = touch2Pos - Input.GetTouch(1).deltaPosition;
+
+            // Визначення відстані між торками на поточному та попередньому кадрах
+            float prevTouchDeltaMag = (touch1PrevPos - touch2PrevPos).magnitude;
+            float touchDeltaMag = (touch1Pos - touch2Pos).magnitude;
+
+            // Визначення зміни відстані між торками
+            float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+            // Зміна зуму камери в залежності від зміни відстані між торками
+            _camera.fieldOfView += deltaMagnitudeDiff * 0.1f;
+
+            // Обмеження значення зуму, щоб воно не виходило за межі minZoom і maxZoom
+            _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, minZoom, maxZoom);
         }
 
-        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
-        {
-            if(zoomAmount < minZoom)
-            {
-                var zoom = 80f * Time.deltaTime;
-                zoomAmount += zoom;
-                var vec3 = Vector3.zero;
-                vec3.z += zoom;
-                camTransform.Translate(vec3, Space.Self);
-            }
-            else
-                zoomAmount = minZoom;
-        }
-        if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
-        {
-            if(zoomAmount > maxZoom)
-            {
-                var zoom = 80f * Time.deltaTime;
-                zoomAmount -= zoom;
-                var vec3 = Vector3.zero;
-                vec3.z -= zoom;
-                camTransform.Translate(vec3, Space.Self);
-            }
-            else
-                zoomAmount = maxZoom;
-        }
-
+        // Плавне переміщення камери до нової позиції
         transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * moveSpeed);
+
+        // Обмеження позиції камери в межах вказаної карти
         transform.position = ClampCam(this.transform.position);
     }
 
@@ -161,7 +140,7 @@ public class CameraMove : MonoBehaviour
         float minX = mapMinX;
         float maxX = mapMaxX;
         float minZ = mapMinZ;
-        float maxZ = MapMaxZ;
+        float maxZ = mapMaxZ;
         float newX = Mathf.Clamp(targetPos.x, minX, maxX);
         float newZ = Mathf.Clamp(targetPos.z, minZ, maxZ);
         return new Vector3(newX, targetPos.y, newZ);
@@ -175,8 +154,8 @@ public class CameraMove : MonoBehaviour
     Vector3 PlanePos(Vector2 screenPos)
     {
         var rayNow = _camera.ScreenPointToRay(screenPos);
-        if(Plane.Raycast(rayNow, out var enterNow))
+        if (Plane.Raycast(rayNow, out var enterNow))
             return rayNow.GetPoint(enterNow);
-        return Vector3.zero; 
+        return Vector3.zero;
     }
 }
