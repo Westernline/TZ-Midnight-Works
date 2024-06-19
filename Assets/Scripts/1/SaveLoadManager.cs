@@ -22,7 +22,9 @@ public class SaveLoadManager : MonoBehaviour
                 fuelingRate = fuelingStations[i].fuelingRate,
                 fuelingRateStantion = fuelingStations[i].fuelingRateStantion,
                 maxFuel = fuelingStations[i].maxFuel,
-                currentFuel = fuelingStations[i].currentFuel
+                currentFuel = fuelingStations[i].currentFuel,
+                bagUpgradeCost = fuelingStations[i].bagUpgradeCost, // Cost for Bag upgrade
+                fastUpgradeCost = fuelingStations[i].fastUpgradeCost // Cost for Fast upgrade
             };
             data.stationsData[i] = stationData;
         }
@@ -58,6 +60,8 @@ public class SaveLoadManager : MonoBehaviour
                     fuelingStations[i].fuelingRateStantion = data.stationsData[i].fuelingRateStantion;
                     fuelingStations[i].maxFuel = data.stationsData[i].maxFuel;
                     fuelingStations[i].currentFuel = data.stationsData[i].currentFuel;
+                    fuelingStations[i].bagUpgradeCost = data.stationsData[i].bagUpgradeCost; // Restore Bag upgrade cost
+                    fuelingStations[i].fastUpgradeCost = data.stationsData[i].fastUpgradeCost; // Restore Fast upgrade cost
                 }
             }
 

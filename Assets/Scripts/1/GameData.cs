@@ -15,4 +15,6 @@ public class StationData
     public float fuelingRateStantion;
     public float maxFuel;
     public float currentFuel;
+    public int bagUpgradeCost; // Add field for Bag upgrade cost
+    public int fastUpgradeCost; // Add field for Fast upgrade cost
 }
