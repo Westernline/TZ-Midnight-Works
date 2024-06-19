@@ -18266,7 +18266,7 @@ MonoBehaviour:
   zoomAmount: 0
   zoomOutMin: 0
   zoomOutMax: 0
-  maxZoom: -10
+  maxZoom: 60
   minZoom: 10
   _camera: {fileID: 0}
 --- !u!4 &969983542
