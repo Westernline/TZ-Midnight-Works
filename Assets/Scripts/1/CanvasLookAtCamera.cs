@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Butom : MonoBehaviour
+public class CanvasLookAtCamera : MonoBehaviour
 {
     Transform cam;
     void Start()

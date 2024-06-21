@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 27856004}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1148,7 +1148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 79892482}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3209,7 +3209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 178689572}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3981,7 +3981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 211742863}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5460,6 +5460,160 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4836639314595006, guid: b3b30da2af31dfe44b078040b1ed3e5e, type: 3}
   m_PrefabInstance: {fileID: 270456161}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &276387218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 276387221}
+  - component: {fileID: 276387220}
+  - component: {fileID: 276387224}
+  - component: {fileID: 276387223}
+  - component: {fileID: 276387222}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: CameraUI
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!20 &276387220
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276387218}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 4
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 15
+  far clip plane: 9999
+  field of view: 60
+  orthographic: 0
+  orthographic size: 25
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 32
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 1
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &276387221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276387218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.14178915, y: 0.85503393, z: -0.3877472, w: 0.31379125}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 969983542}
+  m_LocalEulerAnglesHint: {x: 48.769, y: 139.66, z: -0.076000005}
+--- !u!114 &276387222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276387218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
+--- !u!114 &276387223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276387218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 32
+  m_MaxRayIntersections: 0
+--- !u!124 &276387224
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276387218}
+  m_Enabled: 1
 --- !u!1001 &279350720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5998,7 +6152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 312175133}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8832,7 +8986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 444362242}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10258,6 +10412,7 @@ GameObject:
   - component: {fileID: 514410769}
   - component: {fileID: 514410766}
   - component: {fileID: 514410765}
+  - component: {fileID: 514410770}
   m_Layer: 5
   m_Name: Pumps1
   m_TagString: Untagged
@@ -10378,6 +10533,18 @@ MonoBehaviour:
   Stantion1botum: {fileID: 1580391446}
   Stantion1botumTrue: {fileID: 312175132}
   cost: 1000
+--- !u!114 &514410770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514410763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e2e890bb7ddb14f8b80c799c0a5354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &525718204
 GameObject:
   m_ObjectHideFlags: 0
@@ -10625,7 +10792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 545618757}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: St1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11250,7 +11417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 582051803}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12180,7 +12347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 632867185}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: St2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12790,7 +12957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 695848993}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13315,7 +13482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 730400543}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14221,7 +14388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 748570571}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15700,7 +15867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 835733497}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16937,7 +17104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 874640557}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18283,6 +18450,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1388537712}
+  - {fileID: 276387221}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &972452832
@@ -20450,7 +20618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1077065952}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UpgradeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20663,7 +20831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1095599210}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22265,6 +22433,7 @@ GameObject:
   - component: {fileID: 1175906748}
   - component: {fileID: 1175906752}
   - component: {fileID: 1175906747}
+  - component: {fileID: 1175906753}
   m_Layer: 5
   m_Name: PumpsRefecheng1
   m_TagString: Untagged
@@ -22397,6 +22566,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 30
+--- !u!114 &1175906753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175906745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e2e890bb7ddb14f8b80c799c0a5354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1180214331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25256,7 +25437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1338338795}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25328,6 +25509,7 @@ GameObject:
   - component: {fileID: 1349974555}
   - component: {fileID: 1349974552}
   - component: {fileID: 1349974551}
+  - component: {fileID: 1349974556}
   m_Layer: 5
   m_Name: Pumps1
   m_TagString: Untagged
@@ -25448,6 +25630,18 @@ MonoBehaviour:
   Stantion1botum: {fileID: 79892481}
   Stantion1botumTrue: {fileID: 1095599209}
   cost: 500
+--- !u!114 &1349974556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349974549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e2e890bb7ddb14f8b80c799c0a5354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1352279788
 GameObject:
   m_ObjectHideFlags: 0
@@ -26650,7 +26844,6 @@ GameObject:
   - component: {fileID: 1388537712}
   - component: {fileID: 1388537711}
   - component: {fileID: 1388537709}
-  - component: {fileID: 1388537708}
   - component: {fileID: 1388537713}
   - component: {fileID: 1388537714}
   m_Layer: 0
@@ -26660,14 +26853,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1388537708
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388537707}
-  m_Enabled: 1
 --- !u!124 &1388537709
 Behaviour:
   m_ObjectHideFlags: 0
@@ -26715,7 +26900,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 23
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -27696,7 +27881,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1415061675}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: St3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28698,7 +28883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455842062}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30727,7 +30912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1576891686}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30760,7 +30945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580391447}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pumps2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32147,7 +32332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1670943116}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34111,7 +34296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1808648028}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Stantion1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34148,6 +34333,7 @@ GameObject:
   - component: {fileID: 1812840882}
   - component: {fileID: 1812840885}
   - component: {fileID: 1812840881}
+  - component: {fileID: 1812840886}
   m_Layer: 5
   m_Name: PumpsRefecheng1
   m_TagString: Untagged
@@ -34280,6 +34466,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 30
+--- !u!114 &1812840886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812840879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e2e890bb7ddb14f8b80c799c0a5354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1823722953
 GameObject:
   m_ObjectHideFlags: 0
@@ -35428,6 +35626,7 @@ GameObject:
   - component: {fileID: 1882918160}
   - component: {fileID: 1882918162}
   - component: {fileID: 1882918161}
+  - component: {fileID: 1882918163}
   m_Layer: 5
   m_Name: Text (3)
   m_TagString: Untagged
@@ -35588,6 +35787,18 @@ MeshRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1882918163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882918159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e2e890bb7ddb14f8b80c799c0a5354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1886125644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35916,7 +36127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1893594769}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36997,7 +37208,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 1388537711}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -39382,7 +39593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2090631346}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39777,7 +39988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2104542393}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PumpsRefecheng1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41106,6 +41317,7 @@ GameObject:
   - component: {fileID: 2137393859}
   - component: {fileID: 2137393861}
   - component: {fileID: 2137393860}
+  - component: {fileID: 2137393862}
   m_Layer: 5
   m_Name: Text (3)
   m_TagString: Untagged
@@ -41268,6 +41480,18 @@ MeshRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2137393862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137393858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e2e890bb7ddb14f8b80c799c0a5354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2145385422
 GameObject:
   m_ObjectHideFlags: 0
