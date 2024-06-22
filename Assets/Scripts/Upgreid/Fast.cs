@@ -27,7 +27,7 @@ public class Fast : MonoBehaviour
         {
             bloc = false;
             moneyManager.RemoveMoney(cost);
-            fuelingStation.fuelingRate *= 1.2f; // Increase fuelingRate by 20%
+            fuelingStation.fuelingRate *= 1.05f; // Increase fuelingRate by 20%
             cost = Mathf.CeilToInt(cost * 1.2f); // Increase cost by 20%
             fuelingStation.fastUpgradeCost = cost; // Update the cost in fuelingStation
             Stantion1botum.SetActive(false);
@@ -39,7 +39,7 @@ public class Fast : MonoBehaviour
     private void UpdateRateAndCostText()
     {
         currentRateText.text = "Current Fueling: " + fuelingStation.fuelingRate.ToString("F2");
-        futureRateText.text = "Next: " + (fuelingStation.fuelingRate * 1.2f).ToString("F2");
+        futureRateText.text = "Next: " + (fuelingStation.fuelingRate * 1.05f).ToString("F2");
         futureCostText.text = "$" + Mathf.CeilToInt(cost * 1.2f).ToString();
     }
 }

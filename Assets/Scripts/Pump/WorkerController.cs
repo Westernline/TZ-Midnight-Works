@@ -12,6 +12,9 @@ public class WorkerController : MonoBehaviour
 
     public Transform[] workerSpawnPoints; // Масив точок для позицій працівників
 
+    private Coroutine moveTowardsCarCoroutine;
+    private Coroutine moveTowardsStationCoroutine;
+
     void Start()
     {
         initialRotation = transform.rotation;
@@ -31,8 +34,20 @@ public class WorkerController : MonoBehaviour
             return;
         }
 
+        // Зупиняємо повернення до станції, якщо воно відбувається
+        if (moveTowardsStationCoroutine != null)
+        {
+            StopCoroutine(moveTowardsStationCoroutine);
+        }
+
         currentCar = car;
-        StartCoroutine(MoveTowardsCar());
+
+        // Запускаємо корутину руху до автомобіля
+        if (moveTowardsCarCoroutine != null)
+        {
+            StopCoroutine(moveTowardsCarCoroutine);
+        }
+        moveTowardsCarCoroutine = StartCoroutine(MoveTowardsCar());
     }
 
     IEnumerator MoveTowardsCar()
@@ -69,7 +84,18 @@ public class WorkerController : MonoBehaviour
 
     public void ReturnToStation()
     {
-        StartCoroutine(MoveTowardsStation());
+        // Зупиняємо рух до автомобіля, якщо він відбувається
+        if (moveTowardsCarCoroutine != null)
+        {
+            StopCoroutine(moveTowardsCarCoroutine);
+        }
+
+        // Запускаємо корутину повернення до станції
+        if (moveTowardsStationCoroutine != null)
+        {
+            StopCoroutine(moveTowardsStationCoroutine);
+        }
+        moveTowardsStationCoroutine = StartCoroutine(MoveTowardsStation());
     }
 
     IEnumerator MoveTowardsStation()
