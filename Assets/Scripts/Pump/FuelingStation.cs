@@ -123,7 +123,7 @@ public class FuelingStation : MonoBehaviour
             moveToCarClicked = false; // Reset the flag
             startRefuelClicked = false; // Reset the flag
         }
-        else if (isAutomatic && workers.Count < 0)
+        else if (isAutomatic)
         {
             carController.StartRefueling(); // Start automatic refueling
         }
@@ -285,5 +285,33 @@ public class FuelingStation : MonoBehaviour
     public void FuelingRateStantion(int fuelingRate)
     {
         fuelingRateStantion += fuelingRate;
+    }
+
+    public void RemoveAllWorkersAndSetAutomatic()
+    {
+        // Destroy all worker instances
+        foreach (WorkerController worker in workers)
+        {
+            if (worker != null)
+            {
+                Destroy(worker.gameObject);
+            }
+        }
+
+        // Clear the list of workers
+        workers.Clear();
+
+        // Set the station to automatic
+        isAutomatic = true;
+
+        // Deactivate buttons related to workers
+        moveToCarButton.gameObject.SetActive(false);
+        startRefuelButton.gameObject.SetActive(false);
+
+        // Check if there's a car currently being refueled and start refueling it
+        if (carQueue.Count > 0)
+        {
+            StartCoroutine(FuelCar(carQueue.Peek()));
+        }
     }
 }
