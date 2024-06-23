@@ -5,7 +5,7 @@ public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager instance;
     public TMP_Text moneyText;
-    private int money = 100000;
+    private int money = 1000;
 
     void Awake()
     {
