@@ -12328,7 +12328,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Game
+  m_text: Play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -35689,34 +35689,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4684943063714584, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
       insertIndex: 4
       addedObject: {fileID: 1166770961}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2127021776557366589, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6545119668061686045, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 4933994184762917988, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 229792775738684422, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 4065907637468828467, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 1680182695772511745, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 3825946949822785021, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5261893518063267528, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5804773434661227930, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09e575d3fd166f4489c573635ce22f38, type: 3}
 --- !u!4 &1860828376 stripped
 Transform:
@@ -40065,7 +40038,7 @@ GameObject:
   - component: {fileID: 2059827290}
   - component: {fileID: 2059827289}
   m_Layer: 5
-  m_Name: New Game
+  m_Name: Play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
