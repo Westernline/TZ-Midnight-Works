@@ -24,37 +24,33 @@ public class MoneyManager : MonoBehaviour
     }
 
     public void IncrementRefueledCarCount()
+{
+    refueledCarCount++;
+    UpdateRefueledCarsUI();
+
+    if (refueledCarCount == 1)
     {
-        refueledCarCount++;
-        UpdateRefueledCarsUI();
-
-        if (refueledCarCount == 1 )
-        {
-            targetRefueledCars += 4; // Оновлення цілі
-            UpdateRefueledCarsUI();
-        }
-        else if (refueledCarCount >= targetRefueledCars && refueledCarCount <= 100 )
-        {
-            targetRefueledCars += 5; // Оновлення цілі
-            UpdateRefueledCarsUI();
-        }
-        else if (refueledCarCount >= targetRefueledCars && refueledCarCount >= 100 && refueledCarCount == 100 && refueledCarCount <= 1000 )
-        {
-            targetRefueledCars += 100; // Оновлення цілі
-            UpdateRefueledCarsUI();
-        }
-        else if (refueledCarCount >= targetRefueledCars && refueledCarCount >= 1000 && refueledCarCount == 1000  && refueledCarCount <= 10000)
-        {
-            targetRefueledCars += 1000; // Оновлення цілі
-            UpdateRefueledCarsUI();
-        }
-        else if (refueledCarCount >= targetRefueledCars && refueledCarCount >= 10000  && refueledCarCount == 10000 && refueledCarCount <= 100000)
-        {
-            targetRefueledCars += 10000; // Оновлення цілі
-            UpdateRefueledCarsUI();
-        }
-
+        targetRefueledCars += 4; // Оновлення цілі для першого автомобіля
     }
+    else if (refueledCarCount >= targetRefueledCars && refueledCarCount < 100)
+    {
+        targetRefueledCars += 5; // Оновлення цілі від 1 до 99
+    }
+    else if (refueledCarCount >= targetRefueledCars && refueledCarCount < 1000)
+    {
+        targetRefueledCars += 100; // Оновлення цілі від 100 до 999
+    }
+    else if (refueledCarCount >= targetRefueledCars && refueledCarCount < 10000)
+    {
+        targetRefueledCars += 1000; // Оновлення цілі від 1000 до 9999
+    }
+    else if (refueledCarCount >= targetRefueledCars && refueledCarCount < 100000)
+    {
+        targetRefueledCars += 10000; // Оновлення цілі від 10000 до 99999
+    }
+
+    UpdateRefueledCarsUI();
+}
 
     public int GetRefueledCarCount()
     {
