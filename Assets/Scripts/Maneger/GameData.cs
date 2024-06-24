@@ -17,4 +17,5 @@ public class StationData
     public float currentFuel;
     public int bagUpgradeCost; // Add field for Bag upgrade cost
     public int fastUpgradeCost; // Add field for Fast upgrade cost
+    public bool isAutomatic;
 }

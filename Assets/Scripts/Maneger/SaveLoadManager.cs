@@ -9,77 +9,81 @@ public class SaveLoadManager : MonoBehaviour
     public GameObject[] objectsToSave; // Array of objects whose state needs to be saved
 
     public void SaveGame()
+{
+    GameData data = new GameData();
+    data.money = MoneyManager.instance.GetMoney();
+
+    data.stationsData = new StationData[fuelingStations.Length];
+    for (int i = 0; i < fuelingStations.Length; i++)
     {
-        GameData data = new GameData();
-        data.money = MoneyManager.instance.GetMoney();
-
-        // Save the state of each fueling station
-        data.stationsData = new StationData[fuelingStations.Length];
-        for (int i = 0; i < fuelingStations.Length; i++)
+        StationData stationData = new StationData
         {
-            StationData stationData = new StationData
-            {
-                fuelingRate = fuelingStations[i].fuelingRate,
-                fuelingRateStantion = fuelingStations[i].fuelingRateStantion,
-                maxFuel = fuelingStations[i].maxFuel,
-                currentFuel = fuelingStations[i].currentFuel,
-                bagUpgradeCost = fuelingStations[i].bagUpgradeCost, // Cost for Bag upgrade
-                fastUpgradeCost = fuelingStations[i].fastUpgradeCost // Cost for Fast upgrade
-            };
-            data.stationsData[i] = stationData;
-        }
-
-        // Save the state of each object
-        data.objectsState = new bool[objectsToSave.Length];
-        for (int i = 0; i < objectsToSave.Length; i++)
-        {
-            data.objectsState[i] = objectsToSave[i].activeSelf;
-        }
-
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/" + saveFileName, json);
-        //Debug.Log("Game Saved: " + json);
+            fuelingRate = fuelingStations[i].fuelingRate,
+            fuelingRateStantion = fuelingStations[i].fuelingRateStantion,
+            maxFuel = fuelingStations[i].maxFuel,
+            currentFuel = fuelingStations[i].currentFuel,
+            bagUpgradeCost = fuelingStations[i].bagUpgradeCost,
+            fastUpgradeCost = fuelingStations[i].fastUpgradeCost,
+            isAutomatic = fuelingStations[i].isAutomatic // Збереження стану автоматичності
+        };
+        data.stationsData[i] = stationData;
     }
+
+    data.objectsState = new bool[objectsToSave.Length];
+    for (int i = 0; i < objectsToSave.Length; i++)
+    {
+        data.objectsState[i] = objectsToSave[i].activeSelf;
+    }
+
+    string json = JsonUtility.ToJson(data);
+    File.WriteAllText(Application.persistentDataPath + "/" + saveFileName, json);
+}
+
 
     public void LoadGame()
+{
+    string path = Application.persistentDataPath + "/" + saveFileName;
+    if (File.Exists(path))
     {
-        string path = Application.persistentDataPath + "/" + saveFileName;
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            GameData data = JsonUtility.FromJson<GameData>(json);
-            MoneyManager.instance.RemoveMoney(MoneyManager.instance.GetMoney()); // Remove current money
-            MoneyManager.instance.AddMoney(data.money); // Add saved money
+        string json = File.ReadAllText(path);
+        GameData data = JsonUtility.FromJson<GameData>(json);
+        MoneyManager.instance.RemoveMoney(MoneyManager.instance.GetMoney());
+        MoneyManager.instance.AddMoney(data.money);
 
-            // Restore the state of each fueling station
-            for (int i = 0; i < data.stationsData.Length; i++)
+        for (int i = 0; i < data.stationsData.Length; i++)
+        {
+            if (i < fuelingStations.Length)
             {
-                if (i < fuelingStations.Length)
+                fuelingStations[i].fuelingRate = data.stationsData[i].fuelingRate;
+                fuelingStations[i].fuelingRateStantion = data.stationsData[i].fuelingRateStantion;
+                fuelingStations[i].maxFuel = data.stationsData[i].maxFuel;
+                fuelingStations[i].currentFuel = data.stationsData[i].currentFuel;
+                fuelingStations[i].bagUpgradeCost = data.stationsData[i].bagUpgradeCost;
+                fuelingStations[i].fastUpgradeCost = data.stationsData[i].fastUpgradeCost;
+                fuelingStations[i].isAutomatic = data.stationsData[i].isAutomatic; // Відновлення стану автоматичності
+
+                if (fuelingStations[i].isAutomatic)
                 {
-                    fuelingStations[i].fuelingRate = data.stationsData[i].fuelingRate;
-                    fuelingStations[i].fuelingRateStantion = data.stationsData[i].fuelingRateStantion;
-                    fuelingStations[i].maxFuel = data.stationsData[i].maxFuel;
-                    fuelingStations[i].currentFuel = data.stationsData[i].currentFuel;
-                    fuelingStations[i].bagUpgradeCost = data.stationsData[i].bagUpgradeCost; // Restore Bag upgrade cost
-                    fuelingStations[i].fastUpgradeCost = data.stationsData[i].fastUpgradeCost; // Restore Fast upgrade cost
+                    fuelingStations[i].RemoveAllWorkersAndSetAutomatic(); // Перевести станцію в автоматичний режим, якщо це необхідно
                 }
             }
-
-            // Restore the state of each object
-            for (int i = 0; i < data.objectsState.Length; i++)
-            {
-                if (i < objectsToSave.Length)
-                {
-                    objectsToSave[i].SetActive(data.objectsState[i]);
-                }
-            }
-
-            MoneyManager.instance.UpdateMoneyUI();
-            Debug.Log("Game Loaded: " + json);
         }
-        else
+
+        for (int i = 0; i < data.objectsState.Length; i++)
         {
-            Debug.Log("No save file found");
+            if (i < objectsToSave.Length)
+            {
+                objectsToSave[i].SetActive(data.objectsState[i]);
+            }
         }
+
+        MoneyManager.instance.UpdateMoneyUI();
+        Debug.Log("Game Loaded: " + json);
     }
+    else
+    {
+        Debug.Log("No save file found");
+    }
+}
+
 }
