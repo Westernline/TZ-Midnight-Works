@@ -53,17 +53,23 @@ public class FuelingStation : MonoBehaviour
         // Initialize workers if the station is not automatic and the worker prefab is provided
         if (!isAutomatic && workerPrefab != null)
         {
-            for (int i = 0; i < numberOfPumps; i++)
+            StartCoroutine(InitializeWorkersWithDelay());
+        }
+    }
+
+    private IEnumerator InitializeWorkersWithDelay()
+    {
+        for (int i = 0; i < numberOfPumps; i++)
+        {
+            if (i < workerSpawnPoints.Length) // Ensure the spawn point exists
             {
-                if (i < workerSpawnPoints.Length) // Ensure the spawn point exists
-                {
-                    // Instantiate worker prefab
-                    GameObject workerInstance = Instantiate(workerPrefab, workerSpawnPoints[i].position, Quaternion.identity);
-                    WorkerController worker = workerInstance.GetComponent<WorkerController>();
-                    worker.transform.parent = transform;
-                    worker.SetWorkerSpawnPoints(workerSpawnPoints); // Set worker spawn points on each worker
-                    workers.Add(worker);
-                }
+                yield return new WaitForSeconds(0.5f); // Wait for 0.5 seconds before creating each worker
+                // Instantiate worker prefab
+                GameObject workerInstance = Instantiate(workerPrefab, workerSpawnPoints[i].position, Quaternion.identity);
+                WorkerController worker = workerInstance.GetComponent<WorkerController>();
+                worker.transform.parent = transform;
+                worker.SetWorkerSpawnPoints(workerSpawnPoints); // Set worker spawn points on each worker
+                workers.Add(worker);
             }
         }
     }
@@ -86,6 +92,10 @@ public class FuelingStation : MonoBehaviour
             StartCoroutine(FuelCar(car)); // Start the refueling process
         }
     }
+    private void NotifyCarRefueled()
+{
+    MoneyManager.instance.IncrementRefueledCarCount();
+}
 
     IEnumerator FuelCar(GameObject car)
     {
@@ -148,6 +158,9 @@ public class FuelingStation : MonoBehaviour
 
         carController.FinishRefueling(); // Finish refueling the car
         carQueue.Dequeue(); // Remove the car from the queue
+
+    // Notify MoneyManager
+    NotifyCarRefueled();
 
         // Create a money prefab after refueling
         CreateMoneyPrefab(fuelAmount);
