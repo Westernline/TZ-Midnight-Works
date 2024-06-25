@@ -16,6 +16,7 @@ public class ProgresPump : MonoBehaviour
     {
         // Toggle the active state of Stantion1botum
         Stantion1botum.SetActive(!Stantion1botum.activeSelf);
-        clickParticles.SetActive(!clickParticles.activeSelf);
+        clickParticles.SetActive(!Stantion1botum.activeSelf);
+
     }
 }

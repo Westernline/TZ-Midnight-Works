@@ -9,6 +9,7 @@ public class Bag : MonoBehaviour
     public TMP_Text futureFuelText; // UI text to display future maxFuel
     public TMP_Text futureCostText; // UI text to display future cost
     private MoneyManager moneyManager; // Reference to the MoneyManager
+    public ParticleSystem clickParticles; 
     private bool bloc;
 
     private int cost; // Cost to upgrade
@@ -25,13 +26,21 @@ public class Bag : MonoBehaviour
     {
         if (moneyManager.GetMoney() >= cost && bloc)
         {
+            
             bloc = false;
+            
+        // Запуск партиклів під час кліку
+        if (clickParticles != null)
+        {
+            clickParticles.Play();
+        }
             moneyManager.RemoveMoney(cost);
             fuelingStation.maxFuel *= 1.2f; // Increase maxFuel by 20%
             cost = Mathf.CeilToInt(cost * 1.2f); // Increase cost by 20%
             fuelingStation.bagUpgradeCost = cost; // Update the cost in fuelingStation
-            Stantion1botum.SetActive(false);
+            //Stantion1botum.SetActive(false);
             UpdateFuelAndCostText();
+            
             bloc = true;
         }
     }

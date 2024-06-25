@@ -9,6 +9,7 @@ public class Fast : MonoBehaviour
     public TMP_Text futureRateText; // UI text to display future fuelingRate
     public TMP_Text futureCostText; // UI text to display future cost
     private MoneyManager moneyManager; // Reference to the MoneyManager
+    public ParticleSystem clickParticles; 
     private bool bloc;
 
     private int cost; // Cost to upgrade
@@ -26,11 +27,15 @@ public class Fast : MonoBehaviour
         if (moneyManager.GetMoney() >= cost && bloc)
         {
             bloc = false;
+            if (clickParticles != null)
+        {
+            clickParticles.Play();
+        }
             moneyManager.RemoveMoney(cost);
             fuelingStation.fuelingRate *= 1.05f; // Increase fuelingRate by 20%
             cost = Mathf.CeilToInt(cost * 1.2f); // Increase cost by 20%
             fuelingStation.fastUpgradeCost = cost; // Update the cost in fuelingStation
-            Stantion1botum.SetActive(false);
+            //Stantion1botum.SetActive(false);
             UpdateRateAndCostText();
             bloc = true;
         }

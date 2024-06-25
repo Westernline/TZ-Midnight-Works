@@ -5,6 +5,7 @@ public class Money : MonoBehaviour
     private float fuelAmount;
     public float rotationSpeed = 30f; // Швидкість обертання
     private bool take ;
+    public ParticleSystem clickParticles; 
     
      void Awake ()
     {
@@ -28,6 +29,10 @@ public class Money : MonoBehaviour
         if(take)
         {
             take=false;
+            if (clickParticles != null)
+        {
+            clickParticles.Play();
+        }
             int moneyAmount = Mathf.RoundToInt(fuelAmount * 10); // Наприклад, 10 доларів за 1 літр палива
         MoneyManager.instance.AddMoney(moneyAmount);
         Destroy(gameObject, 0.1f); // Знищуємо об'єкт через 2 секунди після створення

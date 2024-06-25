@@ -5,6 +5,7 @@ public class AutomaticStantion : MonoBehaviour
     public FuelingStation fuelingStation; // Reference to the FuelingStation
     public GameObject Stantion1botum; // Reference to the UI button or game object
     private MoneyManager moneyManager; // Reference to the MoneyManager
+    public ParticleSystem clickParticles; 
     private bool bloc;
 
     private int cost = 10000; // Cost to upgrade
@@ -20,6 +21,10 @@ public class AutomaticStantion : MonoBehaviour
         if (moneyManager.GetMoney() >= cost && bloc)
         {
             bloc = false;
+            if (clickParticles != null)
+        {
+            clickParticles.Play();
+        }
             moneyManager.RemoveMoney(cost);
             fuelingStation.RemoveAllWorkersAndSetAutomatic(); // Correctly call the method
             Stantion1botum.SetActive(false);

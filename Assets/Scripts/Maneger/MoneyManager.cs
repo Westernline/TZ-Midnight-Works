@@ -9,7 +9,7 @@ public class MoneyManager : MonoBehaviour
     private int targetRefueledCars = 1; // Поточна ціль заправлених авто
     public TMP_Text moneyText;
     public TMP_Text refueledCarsText; // Текст для відображення кількості заправлених авто та цілі
-    private int money = 1000;
+    private int money = 1100;
 
     void Awake()
     {

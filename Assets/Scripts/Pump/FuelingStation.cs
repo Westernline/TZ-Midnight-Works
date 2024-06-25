@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FuelingStation : MonoBehaviour
 {
+    public ParticleSystem clickParticles; 
+    public ParticleSystem clickParticles1; 
     public int bagUpgradeCost; // Add this field to track the cost of Bag upgrades
     public int fastUpgradeCost; // Add this field to track the cost of Fast upgrades
     public float fuelingRate = 10f; // Liters per second
@@ -45,6 +47,14 @@ public class FuelingStation : MonoBehaviour
 
     void Start()
     {
+        if (clickParticles1 != null)
+        {
+            var main = clickParticles1.main;
+            main.stopAction = ParticleSystemStopAction.Callback;
+            // Додати ParticleSystemStopHandler до об'єкта clickParticles1
+            ParticleSystemStopHandler stopHandler = clickParticles1.gameObject.AddComponent<ParticleSystemStopHandler>();
+            stopHandler.fuelingStation = this;
+        }
         // Add button event listeners
         moveToCarButton.onClick.AddListener(OnMoveToCarButtonClicked);
         startRefuelButton.onClick.AddListener(OnStartRefuelButtonClicked);
@@ -114,6 +124,10 @@ public class FuelingStation : MonoBehaviour
 
             // Wait for the move to car button click
             yield return new WaitUntil(() => moveToCarClicked);
+            if (clickParticles != null)
+        {
+            clickParticles.Play();
+        }
 
             // Move the worker to the car
             WorkerController worker = workers[0]; // Choose the first available worker
@@ -125,8 +139,12 @@ public class FuelingStation : MonoBehaviour
             startRefuelButton.gameObject.SetActive(true); // Activate the start refuel button
             // Wait for the start refuel button click
             yield return new WaitUntil(() => startRefuelClicked);
+            if (clickParticles1 != null)
+        {
+            clickParticles1.Play();
+        }
 
-            startRefuelButton.gameObject.SetActive(false); // Deactivate the start refuel button
+            //startRefuelButton.gameObject.SetActive(false); // Deactivate the start refuel button
 
             carController.StartRefueling(); // Start refueling the car
 
@@ -169,6 +187,11 @@ public class FuelingStation : MonoBehaviour
         {
             StartCoroutine(FuelCar(carQueue.Peek())); // Start refueling the next car in the queue
         }
+    }
+    public void OnParticleSystemStopped()
+    {
+        // Деактивація об'єкта після завершення партикул системи
+        startRefuelButton.gameObject.SetActive(false);
     }
 
     void OnMoveToCarButtonClicked()

@@ -11,12 +11,15 @@ public class UphreidStantion : MonoBehaviour
     public int cost;
     private bool bloc;
     private SaveLoadManager saveLoadManager; // Reference to the SaveLoadManager
+    public GameObject spriteObject; // Об'єкт з SpriteRenderer
+    public ParticleSystem clickParticles; 
 
     private void Start()
     {
         bloc = true;
-        moneyManager = MoneyManager.instance; 
+        moneyManager = MoneyManager.instance;
         saveLoadManager = FindObjectOfType<SaveLoadManager>(); // Get the SaveLoadManager instance
+        SpriteRenderer spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
     }
 
     void OnMouseUpAsButton()
@@ -24,8 +27,28 @@ public class UphreidStantion : MonoBehaviour
         if (moneyManager.GetMoney() >= cost && bloc)
         {
             bloc = false;
+            if (clickParticles != null)
+        {
+            clickParticles.Play();
+        }
             moneyManager.RemoveMoney(cost);
             Stantion1.SetActive(true);
+            // Зробити спрайт прозорим на початку
+                if (spriteObject != null)
+                {
+                    SpriteRenderer spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
+                    if (spriteRenderer != null)
+                    {
+                        Color color = spriteRenderer.color;
+                        spriteRenderer.color = new Color(color.r, color.g, color.b, 0f);
+                    }
+                }
+
+                // Деактивувати перший дочірній об'єкт
+                if (spriteObject.transform.childCount > 0)
+                {
+                    spriteObject.transform.GetChild(0).gameObject.SetActive(false);
+                }
 
             if (Stantion1botumTrue)
             {
@@ -50,7 +73,7 @@ public class UphreidStantion : MonoBehaviour
         // Зменшити об'єкт в 100 разів
         target.transform.localScale = reducedScale;
 
-        // Повернути об'єкт до початкового розміру за 0.5 секунди
+        // Анімація повернення до початкового розміру
         while (time < duration)
         {
             time += Time.deltaTime;
