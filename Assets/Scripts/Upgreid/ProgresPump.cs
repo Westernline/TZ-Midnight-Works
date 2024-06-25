@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProgresPump : MonoBehaviour
 {
     public GameObject Stantion1botum;
+    public GameObject clickParticles; // Додано поле для партиклів
 
     private void Start()
     {
@@ -15,5 +16,6 @@ public class ProgresPump : MonoBehaviour
     {
         // Toggle the active state of Stantion1botum
         Stantion1botum.SetActive(!Stantion1botum.activeSelf);
+        clickParticles.SetActive(!clickParticles.activeSelf);
     }
 }
